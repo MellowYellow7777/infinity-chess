@@ -238,7 +238,7 @@ mouse.id = -1;
 // once we know the region the mouse is in it will be much easier to figure out
 // which cell exactly it is in, if any.
 
-canvas.onpointermove = function(event) {
+function updateMouse(event) {
   var rect = canvas.getBoundingClientRect();
   var cx = event.clientX - rect.left;
   var cy = event.clientY - rect.top;
@@ -256,7 +256,10 @@ canvas.onpointermove = function(event) {
   ) mouse.id = getIdDiamond(x,y);
   else if (x < 0.5) mouse.id = getIdLCircle(x,y);
   else mouse.id = getIdRCircle(x,y);
+}
 
+canvas.onpointermove = function(event) {
+  updateMouse(event);
   onMouseMove();
 }
 
@@ -315,6 +318,7 @@ function getIdRCircle(x,y) {
 
 canvas.onpointerdown = function(event) {
   this.setPointerCapture(event.pointerId);
+  updateMouse(event);
   onMouseDown();
 }
 
