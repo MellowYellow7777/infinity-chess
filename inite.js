@@ -327,6 +327,10 @@ canvas.onpointerup = function(event) {
   onMouseUp();
 }
 
+canvas.onpointercancel = function(event) {
+  onMouseUp();
+};
+
 function onMouseDown() {}
 
 function onMouseUp() {}
