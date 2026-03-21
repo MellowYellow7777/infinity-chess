@@ -324,6 +324,7 @@ canvas.onpointerdown = function(event) {
 
 canvas.onpointerup = function(event) {
   this.releasePointerCapture(event.pointerId);
+  updateMouse(event);
   onMouseUp();
 }
 
