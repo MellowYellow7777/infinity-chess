@@ -216,22 +216,6 @@ document.body.style.justifyContent = 'center';
 document.body.style.alignItems = 'center';
 document.body.style.overflow = 'hidden';
 
-mouse = {};
-
-canvas.onpointerdown = function(event) {
-  this.setPointerCapture(event.pointerId);
-  onMouseDown();
-}
-
-canvas.onpointerup = function(event) {
-  this.releasePointerCapture(event.pointerId);
-  onMouseUp();
-}
-
-canvas.onpointermove = function(event) {
-  onMouseMove();
-}
-
 var mouse = {};
 mouse.cx = 0;
 mouse.cy = 0;
@@ -255,8 +239,9 @@ mouse.id = -1;
 // which cell exactly it is in, if any.
 
 canvas.onpointermove = function(event) {
-  var cx = event.offsetX;
-  var cy = event.offsetY;
+  var rect = canvas.getBoundingClientRect();
+  var cx = event.clientX - rect.left;
+  var cy = event.clientY - rect.top;
   var x = cx / s;
   var y = cy / s;
   mouse.cx = cx;
