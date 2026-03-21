@@ -205,6 +205,7 @@ P=[A,B,C,D,E];
 M=[...M_A,...M_B,...M_C,...M_D];
 
 canvas = document.createElement('canvas');
+canvas.style.touchAction = 'none';
 ctx = canvas.getContext('2d');
 document.body.appendChild(canvas);
 document.body.style.backgroundColor = 'black';
