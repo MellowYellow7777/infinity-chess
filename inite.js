@@ -206,6 +206,8 @@ M=[...M_A,...M_B,...M_C,...M_D];
 
 canvas = document.createElement('canvas');
 canvas.style.touchAction = 'none';
+canvas.addEventListener('touchstart', e => e.preventDefault(), { passive: false });
+canvas.addEventListener('touchmove', e => e.preventDefault(), { passive: false });
 ctx = canvas.getContext('2d');
 document.body.appendChild(canvas);
 document.body.style.backgroundColor = 'black';
