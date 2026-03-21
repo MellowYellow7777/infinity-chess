@@ -259,6 +259,7 @@ function updateMouse(event) {
 }
 
 canvas.onpointermove = function(event) {
+  if (event.isPrimary === false) return;
   updateMouse(event);
   onMouseMove();
 }
@@ -317,18 +318,21 @@ function getIdRCircle(x,y) {
 }
 
 canvas.onpointerdown = function(event) {
+  if (event.isPrimary === false) return;
   this.setPointerCapture(event.pointerId);
   updateMouse(event);
   onMouseDown();
 }
 
 canvas.onpointerup = function(event) {
+  if (event.isPrimary === false) return;
   this.releasePointerCapture(event.pointerId);
   updateMouse(event);
   onMouseUp();
 }
 
 canvas.onpointercancel = function(event) {
+  if (event.isPrimary === false) return;
   onMouseUp();
 };
 
