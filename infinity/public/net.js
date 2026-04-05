@@ -58,7 +58,7 @@ border-radius:8px;border:none;width:140px">`;
 
   function connect() {
     var proto = location.protocol === 'https:' ? 'wss' : 'ws';
-    ws = new WebSocket('wss://infinity-chess-production.up.railway.app');
+    ws = new WebSocket('wss://infinity-chess-production-7c4b.up.railway.app');
 
     ws.onopen = () => showLobby();
 
