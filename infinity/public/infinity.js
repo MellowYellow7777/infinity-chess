@@ -1189,16 +1189,18 @@ function toggleEditMode() {
   mouse.selected = null
   selectedPiece   = null;
   gameState.selectedMoves = [];
-  mode = mode === 'edit' ? 'play' : 'edit';
-  if (mode === 'edit') {
+  mode = false/*mode === 'edit'*/ ? 'play' : 'edit';
+  if (false/*mode === 'edit'*/) {
     mouse.selected = {type: 'move', color: 'white'};
   }
 }
 
-
-
 function onMouseDown() {
-  if (mode === 'edit') {
+  if (window.myColor && gameState.turn !== window.myColor) {
+    mouse.selected = null; selectedPiece = null; gameState.selectedMoves = []; return;
+  }
+  // lmao literally left this in, we cant have that
+  if (false/*mode === 'edit'*/) {
     if (mouse.id < 0) return;
     var piece = Piece.at(mouse.id);
     if (mouse.selected.type === 'delete') {
@@ -1220,6 +1222,7 @@ function onMouseDown() {
       return;
     }
   }
+
   if (mouse.selected !== null) {
     if (uimake(mouse.id)) return;
   }
@@ -1242,7 +1245,7 @@ function onMouseDown() {
 }
 
 function onMouseUp() {
-  if (mode === 'edit') {
+  if (false/*mode === 'edit'*/) {
     if (mouse.grabbing) {
       var target = Piece.at(mouse.id);
       if (target) target.delete();
@@ -1264,30 +1267,9 @@ function onMouseUp() {
 }
 
 canvas.oncontextmenu = function(event) {
-  if (mode === 'edit') {
+  if (false/*mode === 'edit'*/) {
     event.preventDefault();
     mouse.selected.color = mouse.selected.color === 'white' ? 'black' : 'white';
-  }
-}
-
-function uimake(targetSq) {
-  if (!excl(targetSq) && targetSq !== undefined) {
-    var move = gameState.selectedMoves.find(m => m.to === targetSq);
-    if (move) {
-      // auto-promote 4 now
-      if (move.type === 'promo')
-        move = gameState.selectedMoves.find(m => m.to===targetSq && m.promo==='queen') || move;
-      if (window._netMove) {
-        makeMove(move); 
-        window._netMove(move);
-        gameState.selectedMoves = [];
-        selectedPiece = null;
-        mouse.selected = null;
-      } else {
-        makeMove(move);
-      }
-      return true;
-    }
   }
 }
 
@@ -1387,7 +1369,7 @@ function draw() {
     drawImage(piece.img,piece.square);
   });
 
-  if (mode === 'edit') {
+  if (false/*mode === 'edit'*/) {
     var img = null;
     switch (mouse.selected.color) {
       case 'white':
