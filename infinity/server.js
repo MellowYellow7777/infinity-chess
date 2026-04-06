@@ -122,6 +122,9 @@ wss.on('connection', ws => {
 
       if (!ok) {
         console.log(`[${ws._roomCode}] illegal move from ${ws._id} (${player.color}): ${msg.from}->${msg.to}`);
+        // snap back to reality, . .. ...
+        const state = room.game.getState({ status: null });
+        send(ws, { type: 'state', ...state });
         return;
       }
 
